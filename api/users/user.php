@@ -22,6 +22,8 @@ if (preg_match("/^\/api\/users\/$/",$url)){
     echo "</pre>";
 }
 else if (preg_match("/^\/api\/users\/user\/\d+$/",$url)){
-    $userId = str_replace("api/users/user/", "",$url);
+    $userId = str_replace("/api/users/user/", "",$url);
     echo "GET INFO ABOUT USER ID: " . $userId;
+}else {
+    echo "<h1>404 PAGE NOT FOUND!</h1>";
 }
