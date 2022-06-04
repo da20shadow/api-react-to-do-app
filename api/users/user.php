@@ -22,5 +22,6 @@ if (preg_match("/^\/api\/users\/$/",$url)){
     echo "</pre>";
 }
 else if (preg_match("/^\/api\/users\/user\/\d+$/",$url)){
-    echo "GET ONE USER";
+    $userId = str_replace("api/users/user/", "",$url);
+    echo "GET INFO ABOUT USER ID: " . $userId;
 }
