@@ -1,16 +1,10 @@
 <?php
-echo "USERS DATA <br>";
-echo "<br>";
-echo "URL:";
+header("Content-Type: application/json");
+header('Access-Control-Allow-Origin: https://sourceofanswers.esy.es');
 
-$url = $_SERVER['REQUEST_URI'];
+$url = str_replace('/api/','',$_SERVER['REQUEST_URI']);
 
-var_dump($url);
-echo "<br>";
-echo "<hr>";
-echo "<br>";
-
-if (preg_match("/^\/api\/users\/$/",$url)){
+if (preg_match("/^\/users\/$/",$url)){
 
     $users = [
         ["id" => 1, "username" => "Admin", "email" => "admin@email.com"],
@@ -21,9 +15,23 @@ if (preg_match("/^\/api\/users\/$/",$url)){
     var_dump($users);
     echo "</pre>";
 }
-else if (preg_match("/^\/api\/users\/user\/\d+$/",$url)){
+else if (preg_match("/^\/users\/user\/\d+$/",$url)){
+
     $userId = str_replace("/api/users/user/", "",$url);
     echo "GET INFO ABOUT USER ID: " . $userId;
+
+}else if (preg_match("/^\/users\/user$/",$url)) {
+
+    $data = json_decode( file_get_contents('php://input'), true);
+
+    if (isset($data['username']) && isset($data['email'])){
+        $created = ["message" =>"Successfully Created!"];
+        echo json_encode($created);
+    }else {
+        $error = ["message"=> "Invalid username or Email!"];
+        echo json_encode($error);
+    }
+
 }else {
     echo "<h1>404 PAGE NOT FOUND!</h1>";
 }
