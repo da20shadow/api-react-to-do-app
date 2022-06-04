@@ -10,7 +10,7 @@ echo "<br>";
 echo "<hr>";
 echo "<br>";
 
-if (preg_match("/\//",$url)){
+if (preg_match("/^\/api\/users\/$/",$url)){
 
     $users = [
         ["id" => 1, "username" => "Admin", "email" => "admin@email.com"],
@@ -21,6 +21,6 @@ if (preg_match("/\//",$url)){
     var_dump($users);
     echo "</pre>";
 }
-else if (preg_match("/\/user/",$url)){
+else if (preg_match("/^\/api\/users\/user\/\d+$/",$url)){
     echo "GET ONE USER";
 }
