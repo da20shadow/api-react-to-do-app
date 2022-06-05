@@ -50,17 +50,53 @@ class UserRepository implements UserRepositoryInterface
 
     public function findUserByUsername(string $username): ?UserDTO
     {
-        // TODO: Implement findUserByUsername() method.
+        return $this->db->query(
+            'SELECT id,
+                username,
+                email,
+                password,
+                first_name AS firstName,
+                last_name AS lastName
+                FROM users 
+                WHERE username = :username'
+        )->execute(array(
+            ":username" => $username
+        ))->fetch(UserDTO::class)
+            ->current();
     }
 
     public function findUserByEmail(string $email): ?UserDTO
     {
-        // TODO: Implement findUserByEmail() method.
+        return $this->db->query(
+            'SELECT id,
+                username,
+                email,
+                password,
+                first_name AS firstName,
+                last_name AS lastName
+                FROM users 
+                WHERE email = :email'
+        )->execute(array(
+            ":email" => $email
+        ))->fetch(UserDTO::class)
+            ->current();
     }
 
     public function findUserById(int $id): ?UserDTO
     {
-        // TODO: Implement findUserById() method.
+        return $this->db->query(
+            'SELECT id,
+                username,
+                email,
+                password,
+                first_name AS firstName,
+                last_name AS lastName
+                FROM users 
+                WHERE id = :id'
+        )->execute(array(
+            ":id" => $id
+        ))->fetch(UserDTO::class)
+            ->current();
     }
 
     public function getAll(): array|Generator

@@ -7,8 +7,10 @@ use Database\PDODatabase;
 
 spl_autoload_register();
 
-$base = $_SERVER['DOCUMENT_ROOT'];
-$file = $base . DIRECTORY_SEPARATOR . "Config/db.ini";
+//$base = $_SERVER['DOCUMENT_ROOT'];
+
+//$file = $base . DIRECTORY_SEPARATOR . "Config/db.ini";
+$file = "Config/db.ini";
 $dbInfo = parse_ini_file($file);
 
 $pdo = null;

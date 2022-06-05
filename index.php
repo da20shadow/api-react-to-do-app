@@ -5,10 +5,10 @@ header("Content-Type: application/json");
 header('Access-Control-Allow-Origin: https://sourceofanswers.esy.es');
 
 
-$url = str_replace('backend-react-to-do-app/index.php?','',$_SERVER['REQUEST_URI']);
+//$url = str_replace('backend-react-to-do-app/index.php?','',$_SERVER['REQUEST_URI']);
 
 
-//$url = $_SERVER['REQUEST_URI']; //original
+$url = $_SERVER['REQUEST_URI']; //original
 $data = json_decode(file_get_contents('php://input'), true);
 
 //echo "The URL is: " . $url;
