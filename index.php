@@ -5,13 +5,15 @@ header("Content-Type: application/json");
 header('Access-Control-Allow-Origin: https://sourceofanswers.esy.es');
 
 
-//$url = str_replace('/','',$_SERVER['REQUEST_URI']);
-$url = $_SERVER['REQUEST_URI'];
+$url = str_replace('backend-react-to-do-app/index.php?','',$_SERVER['REQUEST_URI']);
+
+
+//$url = $_SERVER['REQUEST_URI']; //original
 $data = json_decode(file_get_contents('php://input'), true);
 
-echo "The URL is: " . $url;
-echo "\n";
-echo "\n";
+//echo "The URL is: " . $url;
+//echo "\n";
+//echo "\n";
 // when url /users or /users/ return all users
 if (preg_match("/^\/users$/", $url) || preg_match("/^\/users\/$/", $url)) {
 
@@ -59,21 +61,39 @@ else if (preg_match("/^\/user$/", $url)) {
     if (isset($data['username']) && isset($data['email'])
         && isset($data['password']) && isset($data['confirm_password'])) {
 
-        $user = new \App\Models\user\UserDTO();
+        $userDTO = new \App\Models\user\UserDTO();
         try {
-            $user->setUsername($data['username']);
-            $user->setEmail($data['email']);
-            $user->setPassword($data['email']);
+            $userDTO->setUsername($data['username']);
+            $userDTO->setEmail($data['email']);
+            $userDTO->setPassword($data['password']);
 
-            $result = $userService->register($user, $data['confirm_password']);
+            $result = $userService->register($userDTO, $data['confirm_password']);
 
-            $message = ["message" => $result];
-            echo json_encode($message);
+            if (str_contains($result,'Error')){
+
+                header('HTTP:1.1',true,403);
+                $message = ["message" => $result];
+                echo json_encode($message);
+
+            }else if (str_contains($result,'Successfully')){
+
+                $message = ["message" => $result];
+                echo json_encode($message);
+
+            }else {
+
+                header('HTTP:1.1',true,403);
+                $message = ["message" => $result];
+                echo json_encode($message);
+
+            }
 
         } catch (Exception $exception) {
+
             $message = $exception->getMessage();
             $error = ["message" => $message];
             echo json_encode($error);
+
         }
 
 

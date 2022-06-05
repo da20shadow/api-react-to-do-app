@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Temp Front End Requests</title>
+    <style>
+        form {
+            border: 2px solid lightblue;
+            max-width: 50%;
+            margin: 10px auto;
+            padding: 30px 0;
+        }
+        input{
+            display: flex;
+            margin: 10px auto;
+            font-size: 17px;
+            padding: 5px 10px;
+            outline: none;
+        }
+        .btn {
+            margin: 10px auto;
+            display: flex;
+            font-size: 25px;
+            padding: 3px 35px;
+            font-weight: 600;
+            font-family: cursive;
+            cursor: pointer;
+        }
+        #message{
+            margin: 0 auto;
+            text-align: center;
+            padding:15px 50px;
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+<!--        Registration FROM-->
+        <h3 id="message"></h3>
+        <form id="regForm">
+            <h1 style="text-align: center;" >Registration Form</h1>
+            <input name="username" type="text" placeholder="Username">
+            <input name="email" type="text" placeholder="Email">
+            <input name="password" type="text" placeholder="Password">
+            <input name="confirm_password" type="text" placeholder="Re-password">
+            <input class="btn" type="submit" value="Register" />
+        </form>
+<!--        LOGIN FORM-->
+        <form id="logForm">
+            <h1 style="text-align: center;" >Login Form</h1>
+            <input name="email" type="text" placeholder="Email">
+            <input name="password" type="text" placeholder="Password">
+            <input class="btn" type="submit" value="Register" />
+        </form>
+
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -15,7 +15,6 @@ $pdo = null;
 
 try {
     $pdo = new PDO($dbInfo['dsn'],$dbInfo['user'],$dbInfo['pass']);
-    echo "Successfully Connected! \n";
 }catch (\mysql_xdevapi\Exception $exception){
     echo $exception->getMessage();
 }
